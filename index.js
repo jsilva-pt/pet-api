@@ -3,12 +3,23 @@ const { ApolloServer, gql } = require('apollo-server');
 // This is a (sample) collection of pets we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
 // from an existing data source like a REST API or database.
-const pets = [
+const pets = null;
+
+const entities = [
   {
-    name: 'Pet 1'
+    name: 'Entity 1'
   },
   {
-    name: 'Pet 2'
+    name: 'Entity 2'
+  },
+  {
+    name: 'Entity 3'
+  },
+  {
+    name: 'Entity 4'
+  },
+  {
+    name: 'Entity 5'
   },
 ];
 
@@ -22,10 +33,15 @@ const typeDefs = gql`
     name: String
   }
 
+  type Entity {
+    name: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    pets: [Pet]
+    pets: [Pet],
+    entities: [Entity]
   }
 `;
 
@@ -34,6 +50,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     pets: () => pets,
+    entities: () => entities
   },
 };
 
