@@ -3,7 +3,59 @@ const { ApolloServer, gql } = require('apollo-server');
 // This is a (sample) collection of pets we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
 // from an existing data source like a REST API or database.
-const pets = null;
+const pets = [
+  {
+    name: 'Pet 1',
+    gender: 'male',
+    images: [
+      'http://placekitten.com/160/120'
+    ],
+    color: [
+      'black',
+      'white'
+    ]
+  },
+  {
+    name: 'Pet 2',
+    gender: 'female',
+    images: [
+      'http://placekitten.com/160/120'
+    ],
+    color: [
+      'black'
+    ]
+  },
+  {
+    name: 'Pet 3',
+    gender: 'male',
+    images: [
+      'http://placekitten.com/160/120'
+    ],
+    color: [
+      'black'
+    ]
+  },
+  {
+    name: 'Pet 4',
+    gender: 'male',
+    images: [
+      'http://placekitten.com/160/120'
+    ],
+    color: [
+      'black'
+    ]
+  },
+  {
+    name: 'Pet 5',
+    gender: 'male',
+    images: [
+      'http://placekitten.com/160/120'
+    ],
+    color: [
+      'black'
+    ]
+  },
+];;
 
 const entities = [
   {
@@ -30,7 +82,10 @@ const typeDefs = gql`
 
   # This "Pet" type can be used in other type declarations.
   type Pet {
-    name: String
+    name: String,
+    gender: String,
+    images: [String],
+    color: [String]
   }
 
   type Entity {
