@@ -55,7 +55,22 @@ const pets = [
       'black'
     ]
   },
-];;
+  { name: 'Pet 6', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 7', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 8', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 9', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 10', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 11', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 12', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 13', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 14', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 15', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 16', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 17', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 18', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 19', images: ['http://placekitten.com/160/120'] },
+  { name: 'Pet 20', images: ['http://placekitten.com/160/120'] }
+];
 
 const entities = [
   {
@@ -95,7 +110,7 @@ const typeDefs = gql`
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
-    pets: [Pet],
+    pets(page: Int!): [Pet],
     entities: [Entity]
   }
 `;
@@ -104,7 +119,13 @@ const typeDefs = gql`
 // schema.  We'll retrieve pets from the "pets" array above.
 const resolvers = {
   Query: {
-    pets: () => pets,
+    pets: (obj, {page}, context, info) => {
+      var perPage = 15
+      var a = page - 1
+      var from = a * perPage
+      var to = page * perPage
+      return pets.slice(from, to)
+    },
     entities: () => entities
   },
 };
