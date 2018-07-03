@@ -1,4 +1,5 @@
-const { ApolloServer, gql } = require('apollo-server');
+// import { ApolloServer, gql } from 'apollo-server'
+const { ApolloServer, gql } = require( 'apollo-server')
 
 // This is a (sample) collection of pets we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
@@ -108,6 +109,14 @@ const resolvers = {
     entities: () => entities
   },
 };
+// import { merge } from 'lodash'
+// import Queries from './resolvers/queries.js'
+
+// Merge all of the resolver objects together
+// const resolvers = merge(
+//   Queries.resolvers
+// );
+// const resolvers = Queries.resolvers
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
