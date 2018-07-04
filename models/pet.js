@@ -1,12 +1,22 @@
 import mongoose from 'mongoose';
 
-var Schema = mongoose.Schema;
-
-var petSchema = new Schema({
+var petSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
+  },
+  gender: {
+    type: String,
+    required: true
+  },
+  images: {
+    type: [String],
+    required: true
+  },
+  color: {
+    type: [String],
+    required: true
   }
 });
-var Model = mongoose.model('Pet', petSchema);
-module.exports = Model;
+
+export default mongoose.model('Pet', petSchema);

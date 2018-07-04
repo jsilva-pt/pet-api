@@ -23,6 +23,9 @@ const resolvers = merge(
   Queries
 );
 
+import { database } from './utils';
+database.open();
+
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
