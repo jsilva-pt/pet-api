@@ -1,100 +1,12 @@
 // import { ApolloServer, gql } from 'apollo-server'
-const { ApolloServer, gql } = require( 'apollo-server')
-
-// This is a (sample) collection of pets we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const pets = [
-  {
-    name: 'Pet 1',
-    gender: 'male',
-    images: [
-      'http://placekitten.com/160/120'
-    ],
-    color: [
-      'black',
-      'white'
-    ]
-  },
-  {
-    name: 'Pet 2',
-    gender: 'female',
-    images: [
-      'http://placekitten.com/160/120'
-    ],
-    color: [
-      'black'
-    ]
-  },
-  {
-    name: 'Pet 3',
-    gender: 'male',
-    images: [
-      'http://placekitten.com/160/120'
-    ],
-    color: [
-      'black'
-    ]
-  },
-  {
-    name: 'Pet 4',
-    gender: 'male',
-    images: [
-      'http://placekitten.com/160/120'
-    ],
-    color: [
-      'black'
-    ]
-  },
-  {
-    name: 'Pet 5',
-    gender: 'male',
-    images: [
-      'http://placekitten.com/160/120'
-    ],
-    color: [
-      'black'
-    ]
-  },
-];;
-
-const entities = [
-  {
-    name: 'Entity 1'
-  },
-  {
-    name: 'Entity 2'
-  },
-  {
-    name: 'Entity 3'
-  },
-  {
-    name: 'Entity 4'
-  },
-  {
-    name: 'Entity 5'
-  },
-];
+import { ApolloServer, gql } from 'apollo-server'
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
-const typeDefs = gql`
-  # Comments in GraphQL are defined with the hash (#) symbol.
+import petTypeDefs from './schemas/pet'
+import entityTypeDefs from './schemas/entity'
 
-  # This "Pet" type can be used in other type declarations.
-  type Pet {
-    name: String,
-    gender: String,
-    images: [String],
-    color: [String]
-  }
-
-  type Entity {
-    name: String
-  }
-
-  # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
+const typeDefs = `
   type Query {
     pets: [Pet],
     entities: [Entity]
@@ -103,25 +15,20 @@ const typeDefs = gql`
 
 // Resolvers define the technique for fetching the types in the
 // schema.  We'll retrieve pets from the "pets" array above.
-const resolvers = {
-  Query: {
-    pets: () => pets,
-    entities: () => entities
-  },
-};
-// import { merge } from 'lodash'
-// import Queries from './resolvers/queries.js'
+import { merge } from 'lodash'
+import Queries from './resolvers/queries.js'
 
 // Merge all of the resolver objects together
-// const resolvers = merge(
-//   Queries.resolvers
-// );
-// const resolvers = Queries.resolvers
+const resolvers = merge(
+  Queries
+);
 
 // In the most basic sense, the ApolloServer can be started
 // by passing type definitions (typeDefs) and the resolvers
 // responsible for fetching the data for those types.
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs: [typeDefs].concat(petTypeDefs).concat(entityTypeDefs),
+  resolvers });
 
 // This `listen` method launches a web-server.  Existing apps
 // can utilize middleware options, which we'll discuss later.
