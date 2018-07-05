@@ -11,16 +11,30 @@ const typeDefs = `
     pets: [Pet],
     entities: [Entity]
   }
+
+  type Mutation {
+    addPet(
+      name: String!,
+      gender: String!,
+      color: [String]!): Pet
+  }
+
+  schema {
+    query: Query
+    mutation: Mutation
+  }
 `;
 
 // Resolvers define the technique for fetching the types in the
 // schema.  We'll retrieve pets from the "pets" array above.
 import { merge } from 'lodash'
 import Queries from './resolvers/queries.js'
+import Mutations from './resolvers/mutations.js'
 
 // Merge all of the resolver objects together
 const resolvers = merge(
-  Queries
+  Queries,
+  Mutations
 );
 
 import { database } from './utils';

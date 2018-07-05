@@ -1,9 +1,9 @@
-import pet from '../models/pet';
+import Pet from '../models/pet';
 import entity from '../models/entity';
 
 const resolvers = {
   Query: {
-    pets: () => pet.find(),
+    pets: () => Pet.find(),
     entities: () => entity.find()
   }
 }
