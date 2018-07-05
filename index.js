@@ -7,7 +7,7 @@ import entityTypeDefs from './schemas/entity'
 
 const typeDefs = `
   type Query {
-    pets: [Pet],
+    pets(page: Int!): [Pet],
     entities: [Entity]
   }
 

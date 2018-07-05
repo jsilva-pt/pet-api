@@ -3,7 +3,9 @@ import entity from '../models/entity';
 
 const resolvers = {
   Query: {
-    pets: () => Pet.find(),
+    pets: (obj, {page}, context, info) => {
+      return Pet.find()
+    },
     entities: () => entity.find()
   }
 }
