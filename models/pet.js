@@ -1,6 +1,11 @@
 import mongoose from 'mongoose';
 
+var ObjectId = mongoose.Schema.Types.ObjectId;
+
 var petSchema = new mongoose.Schema({
+  _id: {
+    type: ObjectId
+  },
   name: {
     type: String,
     required: true

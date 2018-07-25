@@ -7,15 +7,15 @@ import entityTypeDefs from './schemas/entity'
 
 const typeDefs = `
   type Query {
-    pets(page: Int!): [Pet],
+    pets(page: Int!, perPage: Int!): [Pet],
+    pet(_id: String!): Pet,
     entities: [Entity]
   }
 
   type Mutation {
-    addPet(
-      name: String!,
-      gender: String!,
-      color: [String]!): Pet
+    addPet(name: String!, gender: String!, color: [String]!): Pet
+    updatePet(_id: String!, name: String, gender: String, color: [String]): Pet
+    removePet( _id: String!): Boolean
   }
 
   schema {
